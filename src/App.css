@@ -1,26 +1,4 @@
 @font-face {
-    font-family: 'Arial Nova Cond';
-    src: url('https://high-campus-dev.udtech.co/frontend/web/fonts/ArialNovaCond.ttf');
-}
-@font-face {
-    font-family: 'Avenir Heavy';
-    src: url('https://high-campus-dev.udtech.co/frontend/web/fonts/AvenirHeavy.ttf');
-}
-@font-face {
-    font-family: 'Droid Sans';
-    src: url('https://high-campus-dev.udtech.co/frontend/web/fonts/DroidSans.ttf');
-}
-@font-face {
-    font-family: 'Flexslider Icon';
-    src: url('https://high-campus-dev.udtech.co/frontend/web/fonts/flexslider-icon.ttf');
-}
-@font-face {
     font-family: 'fontawesome';
     src: url('https://high-campus-dev.udtech.co/frontend/web/fonts/fontawesome-webfont.ttf');
-}@font-face {
-    font-family: 'Roboto';
-    src: url('https://high-campus-menu2.udtech.co/frontend/web/fonts/Roboto-Regular.ttf');
-}
-.App {
-    font-family: 'Droid Sans', sans-serif;
 }

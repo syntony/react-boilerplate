@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
-import { API_URL } from '../../utils/const';
+import { APP_NAME, API_URL } from '../../utils/const';
 
 export const authStart = () => ({
   type: actionTypes.AUTH_START
@@ -19,17 +19,17 @@ export const authFail = (error) => ({
 });
 
 export const logout = () => {
-  localStorage.removeItem('thc-react-menu-key-expiration-date');
-  localStorage.removeItem('thc-react-menu-title');
-  localStorage.removeItem('thc-react-menu-profileImage');
-  localStorage.removeItem('thc-react-menu-authKey');
-  localStorage.removeItem('thc-react-menu-patientTypeName');
-  localStorage.removeItem('thc-react-menu-firstName');
-  localStorage.removeItem('thc-react-menu-lastName');
-  localStorage.removeItem('thc-react-menu-email');
-  localStorage.removeItem('thc-react-menu-phone');
-  localStorage.removeItem('thc-react-menu-phoneIsConfirmed');
-  localStorage.removeItem('thc-react-menu-birthday');
+  localStorage.removeItem(`${APP_NAME}-key-expiration-date`);
+  localStorage.removeItem(`${APP_NAME}-title`);
+  localStorage.removeItem(`${APP_NAME}-profileImage`);
+  localStorage.removeItem(`${APP_NAME}-authKey`);
+  localStorage.removeItem(`${APP_NAME}-patientTypeName`);
+  localStorage.removeItem(`${APP_NAME}-firstName`);
+  localStorage.removeItem(`${APP_NAME}-lastName`);
+  localStorage.removeItem(`${APP_NAME}-email`);
+  localStorage.removeItem(`${APP_NAME}-phone`);
+  localStorage.removeItem(`${APP_NAME}-phoneIsConfirmed`);
+  localStorage.removeItem(`${APP_NAME}-birthday`);
 
   return {
     type: actionTypes.AUTH_LOGOUT
@@ -43,17 +43,17 @@ export const auth = (username, password) => dispatch => {
     // eslint-disable-next-line promise/always-return
     .then(response => {
       const expirationDate = new Date(new Date().getTime() + (response.data.expires_in * 1000));
-      localStorage.setItem('thc-react-menu-key-expiration-date', expirationDate);
-      localStorage.setItem('thc-react-menu-title', response.data.title);
-      localStorage.setItem('thc-react-menu-profileImage', response.data.profile_image);
-      localStorage.setItem('thc-react-menu-authKey', response.data.auth_key);
-      localStorage.setItem('thc-react-menu-patientTypeName', response.data.patient_type_name);
-      localStorage.setItem('thc-react-menu-firstName', response.data.first_name);
-      localStorage.setItem('thc-react-menu-lastName', response.data.last_name);
-      localStorage.setItem('thc-react-menu-email', response.data.email);
-      localStorage.setItem('thc-react-menu-phone', response.data.phone);
-      localStorage.setItem('thc-react-menu-phoneIsConfirmed', response.data.phone_is_confirmed);
-      localStorage.setItem('thc-react-menu-birthday', response.data.birthday);
+      localStorage.setItem(`${APP_NAME}-key-expiration-date`, expirationDate);
+      localStorage.setItem(`${APP_NAME}-title`, response.data.title);
+      localStorage.setItem(`${APP_NAME}-profileImage`, response.data.profile_image);
+      localStorage.setItem(`${APP_NAME}-authKey`, response.data.auth_key);
+      localStorage.setItem(`${APP_NAME}-patientTypeName`, response.data.patient_type_name);
+      localStorage.setItem(`${APP_NAME}-firstName`, response.data.first_name);
+      localStorage.setItem(`${APP_NAME}-lastName`, response.data.last_name);
+      localStorage.setItem(`${APP_NAME}-email`, response.data.email);
+      localStorage.setItem(`${APP_NAME}-phone`, response.data.phone);
+      localStorage.setItem(`${APP_NAME}-phoneIsConfirmed`, response.data.phone_is_confirmed);
+      localStorage.setItem(`${APP_NAME}-birthday`, response.data.birthday);
 
       dispatch(checkAuthTimeout(response.data.expires_in));
 
@@ -69,24 +69,24 @@ export const checkAuthTimeout = (expirationTime) => dispatch => {
 };
 
 export const authCheckState = () => dispatch => {
-  const authKey = localStorage.getItem('thc-react-menu-authKey');
+  const authKey = localStorage.getItem(`${APP_NAME}-authKey');
   if (!authKey) {
     dispatch(logout());
   } else {
-    const expirationDate = new Date(localStorage.getItem('thc-react-menu-key-expiration-date'));
+    const expirationDate = new Date(localStorage.getItem(`${APP_NAME}-key-expiration-date`));
 
     if (expirationDate <= new Date()) {
       dispatch(logout());
     } else {
-      const title = localStorage.getItem('thc-react-menu-title');
-      const profileImage = localStorage.getItem('thc-react-menu-profileImage');
-      const patientTypeName = localStorage.getItem('thc-react-menu-patientTypeName');
-      const firstName = localStorage.getItem('thc-react-menu-firstName');
-      const lastName = localStorage.getItem('thc-react-menu-lastName');
-      const email = localStorage.getItem('thc-react-menu-email');
-      const phone = localStorage.getItem('thc-react-menu-phone');
-      const phoneIsConfirmed = localStorage.getItem('thc-react-menu-phoneIsConfirmed');
-      const birthday = localStorage.getItem('thc-react-menu-birthday');
+      const title = localStorage.getItem(`${APP_NAME}-title`);
+      const profileImage = localStorage.getItem(`${APP_NAME}-profileImage`);
+      const patientTypeName = localStorage.getItem(`${APP_NAME}-patientTypeName`);
+      const firstName = localStorage.getItem(`${APP_NAME}-firstName``);
+      const lastName = localStorage.getItem(`${APP_NAME}-lastName`);
+      const email = localStorage.getItem(`${APP_NAME}-email`);
+      const phone = localStorage.getItem(`${APP_NAME}-phone`);
+      const phoneIsConfirmed = localStorage.getItem(`${APP_NAME}-phoneIsConfirmed`);
+      const birthday = localStorage.getItem(`${APP_NAME}-birthday`);
 
       dispatch(authSuccess(null, null, {
         title,
@@ -128,11 +128,11 @@ export const updateUserInfo = (token, data) => dispatch => {
   axios.post(`${API_URL}/user`, data, options)
     // eslint-disable-next-line promise/always-return
     .then(response => {
-      localStorage.setItem('thc-react-menu-firstName', response.data.first_name);
-      localStorage.setItem('thc-react-menu-lastName', response.data.last_name);
-      localStorage.setItem('thc-react-menu-email', response.data.email);
-      localStorage.setItem('thc-react-menu-phone', response.data.phone);
-      localStorage.setItem('thc-react-menu-birthday', response.data.birthday);
+      localStorage.setItem(`${APP_NAME}-firstName`, response.data.first_name);
+      localStorage.setItem(`${APP_NAME}-lastName`, response.data.last_name);
+      localStorage.setItem(`${APP_NAME}-email`, response.data.email);
+      localStorage.setItem(`${APP_NAME}-phone`, response.data.phone);
+      localStorage.setItem(`${APP_NAME}-birthday`, response.data.birthday);
 
       dispatch(updateUserInfoSuccess(response.data));
     })
@@ -151,11 +151,11 @@ export const getUserInfo = (token) => dispatch => {
   axios.get(`${API_URL}/user`, options)
     // eslint-disable-next-line promise/always-return
     .then(response => {
-      localStorage.setItem('thc-react-menu-firstName', response.data.first_name);
-      localStorage.setItem('thc-react-menu-lastName', response.data.last_name);
-      localStorage.setItem('thc-react-menu-email', response.data.email);
-      localStorage.setItem('thc-react-menu-phone', response.data.phone);
-      localStorage.setItem('thc-react-menu-birthday', response.data.birthday);
+      localStorage.setItem(`${APP_NAME}-firstName`, response.data.first_name);
+      localStorage.setItem(`${APP_NAME}-lastName`, response.data.last_name);
+      localStorage.setItem(`${APP_NAME}-email`, response.data.email);
+      localStorage.setItem(`${APP_NAME}-phone`, response.data.phone);
+      localStorage.setItem(`${APP_NAME}-birthday`, response.data.birthday);
 
       dispatch(updateUserInfoSuccess(response.data));
     })
