@@ -16,6 +16,7 @@
     "comma-dangle": "off",
     "generator-star-spacing": "off",
     "import/no-unresolved": "error",
+    "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "no-console": "off",
@@ -25,12 +26,14 @@
     "promise/always-return": "error",
     "promise/catch-or-return": "error",
     "promise/no-native": "off",
+    "react/no-find-dom-node": "off",
     "react/sort-comp": ["error", {
       "order": ["type-annotations", "static-methods", "lifecycle", "everything-else", "render"]
     }],
     "react/jsx-no-bind": "off",
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
-    "react/prefer-stateless-function": "off"
+    "react/prefer-stateless-function": "off",
+    "object-curly-newline": "off",
   },
   "plugins": [
     "flowtype",

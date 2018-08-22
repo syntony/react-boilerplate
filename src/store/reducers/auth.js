@@ -1,96 +1,37 @@
-import * as actionTypes from '../actions/actionTypes';
-import { updateObject } from '../../utils/utility';
+import * as actionTypes from './../actions/actionTypes';
+import { updateObject } from './../../utils/utils';
 
 const initialState = {
-  username: null,
-  password: null,
-  title: null,
-  profileImage: null,
-  authKey: null,
-  patientTypeName: null,
-  firstName: null,
-  lastName: null,
-  email: null,
-  phone: null,
-  phoneIsConfirmed: 0,
-  birthday: null,
+  data: undefined,
   error: null,
   loading: false
 };
 
-const authStart = state => (updateObject(state, {
+const actionStart = state => updateObject(state, { loading: true });
+
+const actionFail = (state, { payload }) => updateObject(state, {
+  error: payload.error,
+  loading: false
+});
+
+const actionSuccess = (state, { payload }) => updateObject(state, {
+  data: payload.data,
   error: null,
-  loading: true
-}));
-
-const authSuccess = (state, action) => (
-  updateObject(state, {
-    username: action.username,
-    password: action.password,
-    title: action.authData.title,
-    profileImage: action.authData.profile_image,
-    authKey: action.authData.auth_key,
-    patientTypeName: action.authData.patient_type_name,
-    firstName: action.authData.first_name,
-    lastName: action.authData.last_name,
-    email: action.authData.email,
-    phone: action.authData.phone,
-    phoneIsConfirmed: action.authData.phone_is_confirmed,
-    birthday: action.authData.birthday,
-    error: null,
-    loading: false
-  })
-);
-
-const authFail = (state, action) => (
-  updateObject(state, {
-    error: action.error,
-    loading: false
-  })
-);
-
-const authLogout = state => (
-  updateObject(state, {
-    username: null,
-    password: null,
-    title: null,
-    profileImage: null,
-    authKey: null,
-    patientTypeName: null,
-    email: null,
-    phone: null,
-    phoneIsConfirmed: 0,
-    birthday: null,
-    error: null
-  })
-);
-
-const updateUserInfoSuccess = (state, action) => (
-  updateObject(state, {
-    title: action.authData.title,
-    profileImage: action.authData.profile_image,
-    patientTypeName: action.authData.patient_type_name,
-    firstName: action.authData.first_name,
-    lastName: action.authData.last_name,
-    email: action.authData.email,
-    phone: action.authData.phone,
-    phoneIsConfirmed: action.authData.phone_is_confirmed,
-    birthday: action.authData.birthday,
-    error: null,
-    loading: false
-  })
-);
+  loading: false
+});
 
 const reducer = (state = initialState, action) => {
   if (action) {
     switch (action.type) {
-      case actionTypes.AUTH_START: return authStart(state, action);
-      case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
-      case actionTypes.AUTH_FAIL: return authFail(state, action);
-      case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
-      case actionTypes.UPDATE_USER_INFO_START: return authStart(state, action);
-      case actionTypes.UPDATE_USER_INFO_SUCCESS: return updateUserInfoSuccess(state, action);
-      case actionTypes.UPDATE_USER_INFO_FAIL: return authFail(state, action);
+      //  start actions
+      case actionTypes.EXAMPLE_START:
+        return actionStart(state, action);
+      //  fail actions
+      case actionTypes.EXAMPLE_FAIL:
+        return actionFail(state, action);
+      //  success actions
+      case actionTypes.EXAMPLE_SUCCESS:
+        return actionSuccess(state, action);
       default:
         return state;
     }

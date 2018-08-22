@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Aux from '../Aux/Aux';
+import Aux from './../Aux/Aux';
 import classes from './Layout.css';
-// import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
-// import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Layout extends Component {
   render() {

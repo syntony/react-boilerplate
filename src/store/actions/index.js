@@ -1,7 +1,1 @@
-export {
-  auth,
-  logout,
-  authCheckState,
-  updateUserInfo,
-  getUserInfo
-} from './auth';
+export * from './auth';
