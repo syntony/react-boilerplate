@@ -13,8 +13,6 @@ import rootReducer from './store/reducers';
 
 let composeEnhancers = null || compose;
 if (process.env.NODE_ENV === 'development') {
-  //  developers live reload
-  registerServiceWorker();
   //  setting up redux dev tools if if it is available on the developer machine
   if (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
     composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
@@ -32,3 +30,4 @@ const app = (
 );
 
 ReactDOM.render(app, document.getElementById('root'));
+registerServiceWorker();
